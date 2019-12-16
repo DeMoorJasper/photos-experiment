@@ -1,0 +1,18 @@
+{
+  "name": "instagram-clone",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "start": "parcel ./src/index.html"
+  },
+  "dependencies": {
+    "@types/react": "^16.9.16",
+    "@types/react-dom": "^16.9.4",
+    "classnames": "^2.2.6",
+    "parcel": "^2.0.0-alpha.3.2",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "tailwindcss": "^1.1.4",
+    "wouter": "^2.4.0"
+  }
+}
