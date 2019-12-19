@@ -1,7 +1,13 @@
-import * as React from "react";
+import React from "react";
+
+import OverviewPage from "./pages/overview";
 
 type Props = {};
 
 export default function App(props: Props) {
-  return <div>This is an application</div>;
+  return (
+    <div>
+      <OverviewPage />
+    </div>
+  );
 }
