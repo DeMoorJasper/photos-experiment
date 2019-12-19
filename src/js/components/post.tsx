@@ -2,33 +2,37 @@ import React from "react";
 
 // @ts-ignore
 import emptyHeart from "../../icons/heart-empty.svg";
+// @ts-ignore
 import filledHeart from "../../icons/heart-filled.svg";
+import Comment, { CommentType } from "./comment";
 
 type User = {
   name: string;
 };
 
-type Comment = {};
-
-type Props = {
+export type PostType = {
   imageUri: string;
   description: string;
   user: User;
-  comments: Array<Comment>;
+  comments: Array<CommentType>;
   likes: number;
   liked: boolean;
+};
+
+type Props = {
+  post: PostType;
   onLike: () => any;
 };
 
 export default function Post(props: Props) {
-  let { imageUri, description, comments, user, liked } = props;
+  let { post } = props;
 
   return (
     <div className="border border-gray-200 shadow rounded overflow-hidden my-8">
       <div className="p-4 flex justify-between">
-        <span className="font-semibold capitalize">{user.name}</span>
+        <span className="font-semibold capitalize">{post.user.name}</span>
         <img
-          src={liked ? filledHeart : emptyHeart}
+          src={post.liked ? filledHeart : emptyHeart}
           title="like"
           alt="like"
           className="h-6 w-auto"
@@ -36,18 +40,22 @@ export default function Post(props: Props) {
       </div>
       <div className="border-t border-b border-gray-100">
         <img
-          src={imageUri}
-          alt={description}
-          title={description}
+          src={post.imageUri}
+          alt={post.description}
+          title={post.description}
           className="w-full h-auto"
         />
       </div>
       <div className="p-4">
         <div className="mb-2">
-          <span className="mr-2 font-semibold">{user.name}</span>
-          {description}
+          <span className="mr-1 font-semibold">{post.user.name}</span>
+          {post.description}
         </div>
-        <div>TODO...</div>
+        <div>
+          {post.comments.slice(0, 5).map((c, i) => (
+            <Comment key={i} comment={c} />
+          ))}
+        </div>
       </div>
     </div>
   );

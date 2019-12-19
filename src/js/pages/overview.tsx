@@ -1,31 +1,24 @@
 import React from "react";
+import useSWR from "swr";
 
-import Post from "../components/post";
-import { getRandomName } from "../utils/random";
+import Post, { PostType } from "../components/post";
+import fetcher from "../utils/api";
 
 type Props = {};
 
 export default function OverviewPage(props: Props) {
-  let posts = new Array(15).fill("").map((item, index) => {
-    return {
-      imageUri: `https://storage.googleapis.com/instagram-clone-test-images/original/${index +
-        1}.jpg`,
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt",
-      comments: [],
-      user: {
-        name: getRandomName()
-      },
-      likes: 10,
-      liked: true,
-      onLike: () => {}
-    };
+  // @ts-ignore
+  const { data } = useSWR<Array<PostType>>("/api/posts", fetcher, {
+    suspense: true
   });
 
   return (
     <div className="max-w-xl mx-auto">
-      {posts.map(postData => {
-        return React.createElement(Post, postData);
+      {data.map((postData: PostType) => {
+        return React.createElement(Post, {
+          post: postData,
+          onLike: () => {}
+        });
       })}
     </div>
   );
