@@ -4,7 +4,8 @@
   "license": "MIT",
   "scripts": {
     "start": "parcel ./src/index.html",
-    "build": "parcel build ./src/index.html --no-minify && mkdir -p public && mv dist/* public"
+    "parcel:build": "parcel build ./src/index.html && mkdir -p public && mv dist/* public",
+    "build": "echo this is a zeit build script"
   },
   "dependencies": {
     "@types/react": "^16.9.16",
