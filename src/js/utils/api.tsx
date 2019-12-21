@@ -1,11 +1,13 @@
 import { getRandomName, getRandomInt } from "./random";
 import { PostType } from "../types/post";
 
+const API_LATENCY = 75;
+
 let posts: Array<PostType> = [];
 
 export async function updatePost(id: number, newPost: any) {
   await new Promise(resolve => {
-    setTimeout(resolve, 150);
+    setTimeout(resolve, API_LATENCY);
   });
 
   let foundIndex = posts.findIndex(p => p.id === id);
@@ -16,7 +18,7 @@ export async function updatePost(id: number, newPost: any) {
 
 export async function getPosts(start: number, end: number) {
   await new Promise(resolve => {
-    setTimeout(resolve, 150);
+    setTimeout(resolve, API_LATENCY);
   });
 
   if (posts.length < end) {

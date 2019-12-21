@@ -15,10 +15,11 @@ export default function OverviewPage(props: Props) {
 
   return (
     <div className="max-w-xl mx-auto">
-      {data.map((postData: PostType) => {
+      {data.map((postData: PostType, i: number) => {
         return React.createElement(Post, {
           post: postData,
-          onLike: () => {}
+          onLike: () => {},
+          key: `post-${i}`
         });
       })}
     </div>
