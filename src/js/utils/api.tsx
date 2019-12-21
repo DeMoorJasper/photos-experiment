@@ -1,9 +1,24 @@
 import { getRandomName, getRandomInt } from "./random";
 import { PostType } from "../types/post";
+import { CommentType } from "../types/comment";
 
 const API_LATENCY = 75;
 
 let posts: Array<PostType> = [];
+
+export async function createComment(
+  id: number,
+  comment: CommentType
+) {
+  await new Promise(resolve => {
+    setTimeout(resolve, API_LATENCY);
+  });
+
+  let foundIndex = posts.findIndex(p => p.id === id);
+  if (foundIndex >= 0) {
+    posts[foundIndex].comments.push(comment);
+  }
+}
 
 export async function updatePost(id: number, newPost: any) {
   await new Promise(resolve => {
@@ -14,6 +29,8 @@ export async function updatePost(id: number, newPost: any) {
   if (foundIndex >= 0) {
     posts[foundIndex] = newPost;
   }
+
+  return posts;
 }
 
 export async function getPosts(start: number, end: number) {

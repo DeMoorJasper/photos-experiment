@@ -1,15 +1,17 @@
 import React from "react";
-import useSWR from "swr";
+import useSWR, { mutate } from "swr";
 
 import Post from "../components/post";
-import fetcher from "../utils/api";
+import fetcher, { updatePost } from "../utils/api";
 import { PostType } from "../types/post";
+
+const POSTS_ENDPOINT = "/api/posts";
 
 type Props = {};
 
 export default function OverviewPage(props: Props) {
   // @ts-ignore
-  const { data } = useSWR<Array<PostType>>("/api/posts", fetcher, {
+  const { data } = useSWR<Array<PostType>>(POSTS_ENDPOINT, fetcher, {
     suspense: true
   });
 
@@ -18,7 +20,15 @@ export default function OverviewPage(props: Props) {
       {data.map((postData: PostType, i: number) => {
         return React.createElement(Post, {
           post: postData,
-          onLike: () => {},
+          onLike: async () => {
+            mutate(
+              POSTS_ENDPOINT,
+              updatePost(postData.id, {
+                ...postData,
+                liked: !postData.liked
+              })
+            );
+          },
           key: `post-${i}`
         });
       })}
