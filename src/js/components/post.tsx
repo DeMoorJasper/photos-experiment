@@ -4,20 +4,9 @@ import React from "react";
 import emptyHeart from "../../icons/heart-empty.svg";
 // @ts-ignore
 import filledHeart from "../../icons/heart-filled.svg";
-import Comment, { CommentType } from "./comment";
-
-type User = {
-  name: string;
-};
-
-export type PostType = {
-  imageUri: string;
-  description: string;
-  user: User;
-  comments: Array<CommentType>;
-  likes: number;
-  liked: boolean;
-};
+import Comment from "./comment";
+import { PostType } from "../types/post";
+import { formatNumber } from "../utils/numbers";
 
 type Props = {
   post: PostType;
@@ -29,15 +18,8 @@ export default function Post(props: Props) {
 
   return (
     <div className="border border-gray-200 shadow rounded overflow-hidden my-8">
-      <div className="p-4 flex justify-between">
+      <div className="p-4">
         <span className="font-semibold capitalize">{post.user.name}</span>
-        <img
-          src={post.liked ? filledHeart : emptyHeart}
-          title="like"
-          alt="like"
-          className="h-6 w-auto cursor-pointer"
-          onClick={onLike}
-        />
       </div>
       <div className="border-t border-b border-gray-100">
         <img
@@ -48,7 +30,17 @@ export default function Post(props: Props) {
           onClick={onLike}
         />
       </div>
-      <div className="p-4">
+      <div className="p-4 flex items-center">
+        <img
+          src={post.liked ? filledHeart : emptyHeart}
+          title="like"
+          alt="like"
+          className="h-6 w-auto cursor-pointer"
+          onClick={onLike}
+        />
+        <span className="ml-4 font-medium">{formatNumber(post.likes)}</span>
+      </div>
+      <div className="pl-4 pb-4 pr-4">
         <div className="mb-2">
           <span className="mr-1 font-semibold">{post.user.name}</span>
           {post.description}

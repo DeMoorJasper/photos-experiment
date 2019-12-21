@@ -1,6 +1,18 @@
 import { getRandomName, getRandomInt } from "./random";
+import { PostType } from "../types/post";
 
-let posts: Array<any> = [];
+let posts: Array<PostType> = [];
+
+export async function updatePost(id: number, newPost: any) {
+  await new Promise(resolve => {
+    setTimeout(resolve, 150);
+  });
+
+  let foundIndex = posts.findIndex(p => p.id === id);
+  if (foundIndex >= 0) {
+    posts[foundIndex] = newPost;
+  }
+}
 
 export async function getPosts(start: number, end: number) {
   await new Promise(resolve => {
@@ -19,7 +31,9 @@ export async function getPosts(start: number, end: number) {
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt",
           comments: [
             {
-              user: getRandomName(),
+              user: {
+                name: getRandomName()
+              },
               comment:
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod"
             }
@@ -27,8 +41,8 @@ export async function getPosts(start: number, end: number) {
           user: {
             name: getRandomName()
           },
-          likes: 10,
-          liked: true
+          likes: getRandomInt(0, 150000),
+          liked: false
         };
       })
     );

@@ -1,12 +1,9 @@
 import React from "react";
 
-export type CommentType = {
-  user: string,
-  comment: string
-};
+import { CommentType } from "../types/comment";
 
 type Props = {
-  comment: CommentType
+  comment: CommentType;
 };
 
 export default function Comment(props: Props) {
@@ -14,7 +11,8 @@ export default function Comment(props: Props) {
 
   return (
     <div className="my-2">
-      <span className="mr-1 font-semibold">{comment.user}</span>{comment.comment}
+      <span className="mr-1 font-semibold">{comment.user.name}</span>
+      {comment.comment}
     </div>
   );
 }

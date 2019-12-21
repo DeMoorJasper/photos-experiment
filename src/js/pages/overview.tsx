@@ -1,8 +1,9 @@
 import React from "react";
 import useSWR from "swr";
 
-import Post, { PostType } from "../components/post";
+import Post from "../components/post";
 import fetcher from "../utils/api";
+import { PostType } from "../types/post";
 
 type Props = {};
 
