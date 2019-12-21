@@ -25,7 +25,7 @@ type Props = {
 };
 
 export default function Post(props: Props) {
-  let { post } = props;
+  let { post, onLike } = props;
 
   return (
     <div className="border border-gray-200 shadow rounded overflow-hidden my-8">
@@ -35,7 +35,8 @@ export default function Post(props: Props) {
           src={post.liked ? filledHeart : emptyHeart}
           title="like"
           alt="like"
-          className="h-6 w-auto"
+          className="h-6 w-auto cursor-pointer"
+          onClick={onLike}
         />
       </div>
       <div className="border-t border-b border-gray-100">
@@ -43,7 +44,8 @@ export default function Post(props: Props) {
           src={post.imageUri}
           alt={post.description}
           title={post.description}
-          className="w-full h-auto"
+          className="w-full h-auto cursor-pointer"
+          onClick={onLike}
         />
       </div>
       <div className="p-4">
