@@ -7,14 +7,16 @@ import filledHeart from "../../icons/heart-filled.svg";
 import Comment from "./comment";
 import { PostType } from "../types/post";
 import { formatNumber } from "../utils/numbers";
+import CommentInput from "./comment-input";
 
 type Props = {
   post: PostType;
   onLike: () => any;
+  onComment: (content: string) => any;
 };
 
 export default function Post(props: Props) {
-  let { post, onLike } = props;
+  let { post, onLike, onComment } = props;
 
   return (
     <div className="border border-gray-200 shadow rounded overflow-hidden my-8">
@@ -50,6 +52,9 @@ export default function Post(props: Props) {
             <Comment key={i} comment={c} />
           ))}
         </div>
+      </div>
+      <div>
+        <CommentInput onSubmit={onComment} />
       </div>
     </div>
   );

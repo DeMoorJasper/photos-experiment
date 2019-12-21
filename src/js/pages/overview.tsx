@@ -2,22 +2,26 @@ import React from "react";
 import useSWR, { mutate } from "swr";
 
 import Post from "../components/post";
-import fetcher, { updatePost } from "../utils/api";
+import fetcher, { updatePost, createComment, POSTS_ENDPOINT, USER_ENDPOINT } from "../utils/api";
 import { PostType } from "../types/post";
-
-const POSTS_ENDPOINT = "/api/posts";
+import { UserType } from "../types/user";
 
 type Props = {};
 
 export default function OverviewPage(props: Props) {
   // @ts-ignore
-  const { data } = useSWR<Array<PostType>>(POSTS_ENDPOINT, fetcher, {
+  const postResponse = useSWR<Array<PostType>>(POSTS_ENDPOINT, fetcher, {
+    suspense: true
+  });
+
+  // @ts-ignore
+  const userResponse = useSWR<Array<UserType>>(USER_ENDPOINT, fetcher, {
     suspense: true
   });
 
   return (
     <div className="max-w-xl mx-auto">
-      {data.map((postData: PostType, i: number) => {
+      {postResponse.data.map((postData: PostType, i: number) => {
         return React.createElement(Post, {
           post: postData,
           onLike: async () => {
@@ -26,6 +30,15 @@ export default function OverviewPage(props: Props) {
               updatePost(postData.id, {
                 ...postData,
                 liked: !postData.liked
+              })
+            );
+          },
+          onComment: async comment => {
+            mutate(
+              POSTS_ENDPOINT,
+              createComment(postData.id, {
+                user: userResponse.data,
+                comment
               })
             );
           },

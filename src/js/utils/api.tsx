@@ -2,28 +2,31 @@ import { getRandomName, getRandomInt } from "./random";
 import { PostType } from "../types/post";
 import { CommentType } from "../types/comment";
 
-const API_LATENCY = 75;
+const DEFAULT_API_LATENCY = 75;
+export const POSTS_ENDPOINT = "/api/posts";
+export const USER_ENDPOINT = "/api/user";
 
 let posts: Array<PostType> = [];
 
-export async function createComment(
-  id: number,
-  comment: CommentType
-) {
+async function emulateLatency(latency = DEFAULT_API_LATENCY) {
   await new Promise(resolve => {
-    setTimeout(resolve, API_LATENCY);
+    setTimeout(resolve, latency);
   });
+}
+
+export async function createComment(id: number, comment: CommentType) {
+  await emulateLatency();
 
   let foundIndex = posts.findIndex(p => p.id === id);
   if (foundIndex >= 0) {
     posts[foundIndex].comments.push(comment);
   }
+
+  return posts;
 }
 
 export async function updatePost(id: number, newPost: any) {
-  await new Promise(resolve => {
-    setTimeout(resolve, API_LATENCY);
-  });
+  await emulateLatency();
 
   let foundIndex = posts.findIndex(p => p.id === id);
   if (foundIndex >= 0) {
@@ -34,9 +37,7 @@ export async function updatePost(id: number, newPost: any) {
 }
 
 export async function getPosts(start: number, end: number) {
-  await new Promise(resolve => {
-    setTimeout(resolve, API_LATENCY);
-  });
+  await emulateLatency();
 
   if (posts.length < end) {
     posts.push(
@@ -70,9 +71,19 @@ export async function getPosts(start: number, end: number) {
   return posts.slice(start, end);
 }
 
+export async function getUser() {
+  await emulateLatency();
+
+  return {
+    name: "John"
+  };
+}
+
 export default async function fetcher(uri: string) {
   switch (uri) {
     case "/api/posts":
       return getPosts(0, 20);
+    case "/api/user":
+      return getUser();
   }
 }
