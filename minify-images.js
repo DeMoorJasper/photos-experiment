@@ -9,17 +9,23 @@ async function run() {
 
   for (let image of images) {
     let sourcePath = path.join(BASE_DIR, "original", image);
-    let targetPath = path.join(
-      BASE_DIR,
-      "medium",
-      image.replace(".jpg", ".webp")
-    );
+    let targetPath = path.join(BASE_DIR, "medium", image);
 
     let sharpInstance = sharp(sourcePath);
+
+    console.log("Minifying:", sourcePath);
+
     await sharpInstance
       .resize(1200)
-      .webp()
+      .jpeg()
       .toFile(targetPath);
+    console.log("Saved JPEG");
+
+    await sharpInstance
+      .resize(1200)
+      .webp({ reductionEffort: 6 })
+      .toFile(targetPath.replace(".jpg", ".webp"));
+    console.log("Saved WEBP");
   }
 }
 
