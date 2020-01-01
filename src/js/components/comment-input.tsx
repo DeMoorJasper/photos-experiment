@@ -1,4 +1,5 @@
 import React from "react";
+import Editor from '@atlaskit/editor-core';
 
 type Props = {
   onSubmit: (comment: string) => any;
@@ -14,6 +15,9 @@ export default function CommentInput(props: Props) {
 
     setValue(e.target.value);
   };
+
+  Editor.ACTION;
+  console.log(Editor);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
