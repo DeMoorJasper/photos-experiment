@@ -8,8 +8,8 @@ import Comment from "./comment";
 import { PostType } from "../types/post";
 import { formatNumber } from "../utils/numbers";
 
-// import CommentInput from "./comment-input";
-const CommentInput = React.lazy(() => import("./comment-input"));
+import CommentInput from "./comment-input";
+// const CommentInput = React.lazy(() => import("./comment-input"));
 
 type Props = {
   post: PostType;
