@@ -1,5 +1,5 @@
 import React from "react";
-import accounting from "accounting";
+import lodash from "lodash";
 
 type Props = {
   onSubmit: (comment: string) => any;
@@ -23,7 +23,7 @@ export default function CommentInput(props: Props) {
     }
   };
 
-  accounting
+  lodash
 
   return <input
     type="text"
