@@ -7,7 +7,8 @@ import filledHeart from "../../icons/heart-filled.svg";
 import Comment from "./comment";
 import { PostType } from "../types/post";
 import { formatNumber } from "../utils/numbers";
-import CommentInput from "./comment-input";
+
+const CommentInput = React.lazy(() => import("./comment-input"));
 
 type Props = {
   post: PostType;
@@ -54,7 +55,9 @@ export default function Post(props: Props) {
         </div>
       </div>
       <div>
-        <CommentInput onSubmit={onComment} />
+        <React.Suspense fallback={null}>
+          <CommentInput onSubmit={onComment} />
+        </React.Suspense>
       </div>
     </div>
   );
