@@ -1,5 +1,4 @@
 import React from "react";
-import lodash from "lodash";
 
 type Props = {
   onSubmit: (comment: string) => any;
@@ -22,9 +21,7 @@ export default function CommentInput(props: Props) {
       setValue("");
     }
   };
-
-  lodash
-
+  
   return <input
     type="text"
     className="bg-gray-100 text-gray-900 shadow w-full p-2"
