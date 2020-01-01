@@ -1,5 +1,5 @@
 import React from "react";
-import { Editor } from "@atlaskit/editor-core";
+import accounting from "accounting";
 
 type Props = {
   onSubmit: (comment: string) => any;
@@ -23,14 +23,14 @@ export default function CommentInput(props: Props) {
     }
   };
 
-  /*return <input
+  accounting
+
+  return <input
     type="text"
     className="bg-gray-100 text-gray-900 shadow w-full p-2"
     placeholder="Comment..."
     onChange={handleChange}
     onKeyDown={handleKeyDown}
     value={value}
-  />;*/
-
-  return <Editor appearance="comment" />;
+  />;
 }
