@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "start": "cp -r images ./dist/images && parcel ./src/index.html --no-source-maps",
-    "build": "cp -r images ./public/images && parcel build ./src/index.html --no-source-maps --out-dir public",
+    "build": "parcel build ./src/index.html --no-source-maps --out-dir public && cp -r images ./public/images",
     "minify": "node ./minify-images.js"
   },
   "dependencies": {
