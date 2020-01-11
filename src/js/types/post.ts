@@ -3,7 +3,7 @@ import { CommentType } from "./comment";
 
 export type PostType = {
   id: number;
-  imageUri: string;
+  imageUri: { webp: string; jpeg: string };
   description: string;
   user: UserType;
   comments: Array<CommentType>;

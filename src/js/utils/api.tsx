@@ -3,8 +3,6 @@ import { PostType } from "../types/post";
 import { CommentType } from "../types/comment";
 
 const DEFAULT_API_LATENCY = 75;
-const USE_WEBP = true;
-const USE_COMPRESSED_IMAGE = true;
 
 export const POSTS_ENDPOINT = "/api/posts";
 export const USER_ENDPOINT = "/api/user";
@@ -49,9 +47,10 @@ export async function getPosts(start: number, end: number) {
 
         return {
           id: posts.length + index,
-          imageUri: `/images/${
-            USE_COMPRESSED_IMAGE ? "medium" : "original"
-          }/${imageId}.${USE_WEBP ? "webp" : "jpg"}`,
+          imageUri: {
+            webp: `/images/medium/${imageId}.webp`,
+            jpeg: `/images/medium/${imageId}.jpg`
+          },
           description:
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt",
           comments: [

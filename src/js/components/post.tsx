@@ -26,16 +26,10 @@ export default function Post(props: Props) {
       </div>
       <div className="border-t border-b border-gray-100">
         <picture className="w-full">
-          <source
-            srcSet="https://cdn.gypsydesainttropez.com/8c9ac3b7a351dd05f7226c103f41c2e0366d838c34c16d10b32d5ee52249f454-l.webp"
-            type="image/webp"
-          />
-          <source
-            srcSet="https://cdn.gypsydesainttropez.com/8c9ac3b7a351dd05f7226c103f41c2e0366d838c34c16d10b32d5ee52249f454-l.jpg"
-            type="image/jpeg"
-          />
+          <source srcSet={post.imageUri.webp} type="image/webp" />
+          <source srcSet={post.imageUri.jpeg} type="image/jpeg" />
           <img
-            src="https://cdn.gypsydesainttropez.com/8c9ac3b7a351dd05f7226c103f41c2e0366d838c34c16d10b32d5ee52249f454-l.jpg"
+            src={post.imageUri.jpeg}
             alt={post.description}
             title={post.description}
             className="w-full"
