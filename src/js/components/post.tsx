@@ -59,7 +59,7 @@ export default function Post(props: Props) {
       </div>
       <div>
         <React.Suspense fallback={null}>
-          <CommentInput onSubmit={onComment} />
+          <CommentInput onSubmit={onComment} id={`comment-${post.id}`} />
         </React.Suspense>
       </div>
     </div>
