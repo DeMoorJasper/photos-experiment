@@ -49,7 +49,7 @@ export async function getPosts(start: number, end: number) {
 
         return {
           id: posts.length + index,
-          imageUri: `https://storage.googleapis.com/instagram-clone-test-images/${
+          imageUri: `/images/${
             USE_COMPRESSED_IMAGE ? "medium" : "original"
           }/${imageId}.${USE_WEBP ? "webp" : "jpg"}`,
           description:

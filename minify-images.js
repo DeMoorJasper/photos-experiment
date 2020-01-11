@@ -16,13 +16,13 @@ async function run() {
     console.log("Minifying:", sourcePath);
 
     await sharpInstance
-      .resize(1200)
+      .resize(700)
       .jpeg()
       .toFile(targetPath);
     console.log("Saved JPEG");
 
     await sharpInstance
-      .resize(1200)
+      .resize(700)
       .webp({ reductionEffort: 6 })
       .toFile(targetPath.replace(".jpg", ".webp"));
     console.log("Saved WEBP");

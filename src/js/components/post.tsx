@@ -25,13 +25,22 @@ export default function Post(props: Props) {
         <span className="font-semibold capitalize">{post.user.name}</span>
       </div>
       <div className="border-t border-b border-gray-100">
-        <img
-          src={post.imageUri}
-          alt={post.description}
-          title={post.description}
-          className="w-full h-auto cursor-pointer"
-          onClick={onLike}
-        />
+        <picture className="w-full">
+          <source
+            srcSet="https://cdn.gypsydesainttropez.com/8c9ac3b7a351dd05f7226c103f41c2e0366d838c34c16d10b32d5ee52249f454-l.webp"
+            type="image/webp"
+          />
+          <source
+            srcSet="https://cdn.gypsydesainttropez.com/8c9ac3b7a351dd05f7226c103f41c2e0366d838c34c16d10b32d5ee52249f454-l.jpg"
+            type="image/jpeg"
+          />
+          <img
+            src="https://cdn.gypsydesainttropez.com/8c9ac3b7a351dd05f7226c103f41c2e0366d838c34c16d10b32d5ee52249f454-l.jpg"
+            alt={post.description}
+            title={post.description}
+            className="w-full"
+          />
+        </picture>
       </div>
       <div className="p-4 flex items-center">
         <img
