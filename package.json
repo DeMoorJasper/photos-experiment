@@ -24,6 +24,7 @@
     "wouter": "^2.4.0"
   },
   "devDependencies": {
+    "@fullhuman/postcss-purgecss": "^2.0.5",
     "fs-extra": "^8.1.0",
     "sharp": "^0.23.4"
   }
